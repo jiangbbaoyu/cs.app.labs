@@ -3,4 +3,4 @@ project(cs_app_labs C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(cs_app_labs main.c datalab-handout/bits.c)
+add_executable(cs_app_labs main.c 1-datalab-handout/bits.c)
