@@ -160,7 +160,9 @@ Cache CreateCache(Options opt) {
     cache.length = opt.S;
 
     for (int i = 0; i < opt.S; ++i) {
-        if ((cache.sets[i].lines = calloc(opt.E,sizeof(Line))) == NULL) {  // initialize the lines in set
+        if (((cache.sets+i)->lines = calloc(opt.E,sizeof(Line))) == NULL) {  // initialize the lines in set
+            // cache.sets[i]  equals to  *(cache.sets+i)
+//        if ((cache.sets[i].lines = calloc(opt.E,sizeof(Line))) == NULL) {  // initialize the lines in set
             char errStr[40];
             sprintf(errStr,"Failed to create lines of set %d \n",i);
             perror(errStr);
