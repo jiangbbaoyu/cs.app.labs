@@ -41,41 +41,41 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /root/CLionProjects/cs.app.labs/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target cs_app_labs
+# Object build statements for EXECUTABLE target 914mmap
 
 
 #############################################
-# Order-only phony target for cs_app_labs
+# Order-only phony target for 914mmap
 
-build cmake_object_order_depends_target_cs_app_labs: phony || CMakeFiles/cs_app_labs.dir
+build cmake_object_order_depends_target_914mmap: phony || CMakeFiles/914mmap.dir
 
-build CMakeFiles/cs_app_labs.dir/main.c.o: C_COMPILER__cs_app_labs_Debug /root/CLionProjects/cs.app.labs/main.c || cmake_object_order_depends_target_cs_app_labs
-  DEP_FILE = CMakeFiles/cs_app_labs.dir/main.c.o.d
+build CMakeFiles/914mmap.dir/6-malloclab/914_mmap.c.o: C_COMPILER__914mmap_Debug /root/CLionProjects/cs.app.labs/6-malloclab/914_mmap.c || cmake_object_order_depends_target_914mmap
+  DEP_FILE = CMakeFiles/914mmap.dir/6-malloclab/914_mmap.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/cs_app_labs.dir
-  OBJECT_FILE_DIR = CMakeFiles/cs_app_labs.dir
+  OBJECT_DIR = CMakeFiles/914mmap.dir
+  OBJECT_FILE_DIR = CMakeFiles/914mmap.dir/6-malloclab
 
-build CMakeFiles/cs_app_labs.dir/1-datalab-handout/bits.c.o: C_COMPILER__cs_app_labs_Debug /root/CLionProjects/cs.app.labs/1-datalab-handout/bits.c || cmake_object_order_depends_target_cs_app_labs
-  DEP_FILE = CMakeFiles/cs_app_labs.dir/1-datalab-handout/bits.c.o.d
+build CMakeFiles/914mmap.dir/6-malloclab/csapp.c.o: C_COMPILER__914mmap_Debug /root/CLionProjects/cs.app.labs/6-malloclab/csapp.c || cmake_object_order_depends_target_914mmap
+  DEP_FILE = CMakeFiles/914mmap.dir/6-malloclab/csapp.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/cs_app_labs.dir
-  OBJECT_FILE_DIR = CMakeFiles/cs_app_labs.dir/1-datalab-handout
+  OBJECT_DIR = CMakeFiles/914mmap.dir
+  OBJECT_FILE_DIR = CMakeFiles/914mmap.dir/6-malloclab
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target cs_app_labs
+# Link build statements for EXECUTABLE target 914mmap
 
 
 #############################################
-# Link the executable cs_app_labs
+# Link the executable 914mmap
 
-build cs_app_labs: C_EXECUTABLE_LINKER__cs_app_labs_Debug CMakeFiles/cs_app_labs.dir/main.c.o CMakeFiles/cs_app_labs.dir/1-datalab-handout/bits.c.o
+build 914mmap: C_EXECUTABLE_LINKER__914mmap_Debug CMakeFiles/914mmap.dir/6-malloclab/914_mmap.c.o CMakeFiles/914mmap.dir/6-malloclab/csapp.c.o
   FLAGS = -g
-  OBJECT_DIR = CMakeFiles/cs_app_labs.dir
+  OBJECT_DIR = CMakeFiles/914mmap.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = cs_app_labs
-  TARGET_PDB = cs_app_labs.dbg
+  TARGET_FILE = 914mmap
+  TARGET_PDB = 914mmap.dbg
 
 
 #############################################
@@ -111,7 +111,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /root/CLionProjects/cs.app.labs/cmake-build-debug
 
-build all: phony cs_app_labs
+build all: phony 914mmap
 
 # =============================================================================
 # Built-in targets

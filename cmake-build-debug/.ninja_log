@@ -1,3 +1,6 @@
 # ninja log v5
-1	23	1691377598295439563	CMakeFiles/cs_app_labs.dir/main.c.o	355ef0e984b7f887
-23	40	1691377598315446313	cs_app_labs	1476d9e6d2e6add7
+0	28	1701526072041542846	CMakeFiles/cs_app_labs.dir/main.c.o	355ef0e984b7f887
+0	55	1701526072069521634	CMakeFiles/cs_app_labs.dir/1-datalab-handout/bits.c.o	409511989b1108b7
+55	73	1701526072085509513	cs_app_labs	c4a6f47bfb15f864
+0	85	1701528049498023132	CMakeFiles/914mmap.dir/6-malloclab/914_mmap.c.o	2679f495e4203f7f
+0	199	1701528049614237732	CMakeFiles/914mmap.dir/6-malloclab/csapp.c.o	267f5e5e97042a65

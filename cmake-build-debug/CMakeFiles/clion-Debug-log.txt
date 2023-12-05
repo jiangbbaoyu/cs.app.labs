@@ -1,4 +1,1 @@
-/root/clion-2022.3.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/root/clion-2022.3.1/bin/ninja/linux/ninja -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11 -G Ninja -S /root/CLionProjects/cs.app.labs -B /root/CLionProjects/cs.app.labs/cmake-build-debug
--- Configuring done
--- Generating done
--- Build files have been written to: /root/CLionProjects/cs.app.labs/cmake-build-debug
+CMakeLists.txt not found in /root/CLionProjects/cs.app.labs Select CMakeLists.txt
