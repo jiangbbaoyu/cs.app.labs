@@ -202,7 +202,7 @@ int mm_init(void)
     PUT(heap+(2*WSIZE), PACK(DSIZE,1)); //prologue footer
     PUT(heap+(3*WSIZE), PACK(0,1));     // Epilogue header
 
-    if (extend_heap(CHUNKSIZE)== NULL)
+    if (extend_heap(INITCHUNKSIZE)== NULL)
     {
         return -1;
     }
@@ -232,7 +232,7 @@ void *mm_malloc(size_t size)
         {
             // found the suitable-sized free list ( segregated_free_lists[target_list_no, LISTSIZE]  are all matched free lists )
             bp = segregated_free_lists[target_list_no];
-            while (bp != NULL && GET_SIZE(HDRP(bp)) < size )
+            while ( (bp != NULL) && (GET_SIZE(HDRP(bp)) < size) )
             {
                 bp = SUCC(bp);
             }
@@ -280,13 +280,13 @@ void mm_free(void *ptr)
  */
 void *mm_realloc(void *ptr, size_t size)
 {
-    if (size <-0)
+    if (size <= 0)
         return NULL;
 
     if (size < DSIZE)
         size = 2*DSIZE;
     else
-        size = ALIGN(size) + 2*DSIZE;
+        size = ALIGN(size) + DSIZE;
 
     size_t current_size = GET_SIZE(HDRP(ptr));
 
@@ -302,12 +302,10 @@ void *mm_realloc(void *ptr, size_t size)
         if (extend_heap(extend_size) == NULL)
             return NULL;
 
-
         size_t new_blk_size = extend_size + current_size;
+        delete_node(NEXT_BLK_PTR(ptr));
         PUT(HDRP(ptr), PACK(new_blk_size,1));
         PUT(FTRP(ptr), PACK(new_blk_size,1));
-
-        place(ptr,size);
         return ptr;
     }
 
@@ -318,10 +316,9 @@ void *mm_realloc(void *ptr, size_t size)
         size_t new_blk_size = next_free_blk_size + current_size;
         if (new_blk_size >= size)
         {
+            delete_node(NEXT_BLK_PTR(ptr));
             PUT(HDRP(ptr), PACK(new_blk_size,1));
             PUT(FTRP(ptr), PACK(new_blk_size,1));
-
-            place(ptr,size);
             return ptr;
         }
     }
@@ -332,8 +329,6 @@ void *mm_realloc(void *ptr, size_t size)
     mm_free(ptr);
     return new_block;
 }
-
-
 
 static void* extend_heap(size_t size)
 {
@@ -378,7 +373,7 @@ static void insert_node(void* bp)
 
     // Find the insert position for block, keep free list in ascending order
     succ_blk_ptr = segregated_free_lists[target_list_no];
-    while ((succ_blk_ptr != NULL) && GET_SIZE(HDRP(succ_blk_ptr))<size)
+    while ((succ_blk_ptr != NULL) && (GET_SIZE(HDRP(succ_blk_ptr)) < size) )
     {
         prev_blk_ptr = succ_blk_ptr;
         succ_blk_ptr = SUCC(succ_blk_ptr);
@@ -483,7 +478,7 @@ static void* coalesce(void *bp)
         PUT(FTRP(NEXT_BLK_PTR(bp)), PACK(coalesced_size,0));
 
         // Reset current block's pointer to the new coalesced block
-        bp = NEXT_BLK_PTR(bp);
+        bp = PREV_BLK_PTR(bp);
     }
 
     // Insert this new coalesced block into the free lists
@@ -514,9 +509,10 @@ static void delete_node(void* bp)
         else
         {
             // 2. this block is the first block of target free list, set the free list's first block to the successor of this block
+            segregated_free_lists[target_list_no] = SUCC(bp);
             SET_PTR(PRED_PTR(SUCC(bp)), NULL);
             SET_PTR(SUCC_PTR(bp), NULL);
-            segregated_free_lists[target_list_no] = SUCC(bp);
+
         }
     }else
     {
@@ -530,10 +526,10 @@ static void delete_node(void* bp)
         {
             // 4. The current block is neither the beginning nor the end of the list
             SET_PTR(SUCC_PTR(PRED(bp)), SUCC(bp));
-            SET_PTR(PRED_PTR(bp),NULL);
-
             SET_PTR(PRED_PTR(SUCC(bp)), PRED(bp));
+
             SET_PTR(SUCC_PTR(bp),NULL);
+            SET_PTR(PRED_PTR(bp),NULL);
         }
     }
 }
@@ -559,8 +555,8 @@ static void* place(void* bp,size_t size)
         //3. insert into free list
         insert_node(NEXT_BLK_PTR(bp));
 
-        // 4. do possible coalesce
-        coalesce(NEXT_BLK_PTR(bp));
+        // no need to do coalesce, if this block is free,  the next block must not be free
+//        coalesce(NEXT_BLK_PTR(bp));
 
     }
     else
